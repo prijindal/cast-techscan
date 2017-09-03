@@ -9,20 +9,33 @@
 <div *ngIf="user; else loadingBlock" class="container">
   <md-sidenav-container>
     <md-sidenav mode="side" opened="true">
-      {{user.login}}
+      <md-card>
+        <div class="profile-img">
+          <img md-card-image [src]="user.avatar_url"/>
+        </div>
+        <md-card-content>
+          <md-card-title>{{user.name}}</md-card-title>
+          <md-card-subtitle>{{user.login}}</md-card-subtitle>
+          <p *ngIf="user.bio">
+            {{user.bio}}
+          </p>
+          <p *ngIf="user.location">Location: {{user.location}}</p>
+          <p *ngIf="user.email">Email: {{user.email}}</p>
+        </md-card-content>
+      </md-card>
     </md-sidenav>
     <div class="main-content">
-      <!-- <div *ngIf="loading === false; else loadingBlock" class="grid">
-        <home-repo-component *ngFor="let repo of repos.items" [repo]=repo></home-repo-component>
+      <div *ngIf="loading === false; else loadingBlock" class="grid">
+        <home-repo-component *ngFor="let repo of repos" [repo]=repo></home-repo-component>
       </div>
       <ng-template #loadingBlock>
         <md-spinner strokeWidth="5" mode="indeterminate"></md-spinner>          
       </ng-template>
-      <md-paginator [length]="repos.total_count"
+      <md-paginator [length]="user.public_repos"
         [pageIndex]="pageIndex"
         [pageSize]="pageSize"
         (page)="onChangePageSize($event)">
-      </md-paginator> -->
+      </md-paginator>
     </div>
   </md-sidenav-container>
 </div>

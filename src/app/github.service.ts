@@ -33,8 +33,8 @@ export class GithubService {
   }
 
 
-  public getUserRepos(login: string) {
-    const url = `https://api.github.com/users/${login}/repos`;
+  public getUserRepos(login: string, pageIndex: number, pageSize: number) {
+    const url = `https://api.github.com/users/${login}/repos?page=${pageIndex + 1}&per_page=${pageSize}`;
     return this.http.get(url, this.getRequestOptions())
     .map(response => response.json() as Repo[])
     .toPromise()

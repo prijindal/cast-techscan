@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { Location } from '@angular/common';
+import { MdPaginator } from '@angular/material';
 
 import { GithubService } from '../github.service';
 import { User } from '../user';
@@ -15,7 +16,11 @@ import { Repo } from '../repo';
 export class UserComponent implements OnInit {
   login: string;
   user: User;
-  repos: Repo[]
+  repos: Repo[];
+
+  pageSize = 6;
+  pageIndex = 0;
+  loading: boolean = false;
   constructor(
     private location: Location,
     private route: ActivatedRoute,
@@ -27,7 +32,7 @@ export class UserComponent implements OnInit {
     this.login = this.route.snapshot.paramMap.get('login');
     this.title.setTitle(`TechScan | ${this.login}`);    
     this.getUser();
-    // this.getUserRepos();
+    this.getUserRepos();
   }
   
   getUser() {
@@ -38,10 +43,17 @@ export class UserComponent implements OnInit {
   }
 
   getUserRepos() {
-    this.github.getUserRepos(this.login)
+    this.loading = true;
+    this.github.getUserRepos(this.login, this.pageIndex, this.pageSize)
     .then((response) => {
       this.repos = response;
+      this.loading = false;
     })
+  }
+
+  onChangePageSize(event: MdPaginator) {
+    this.pageIndex = event.pageIndex;
+    this.getUserRepos();
   }
 
   goBack() {

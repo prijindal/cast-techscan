@@ -1,3 +1,17 @@
 @import "../mixins";
 
 @include page();
+
+md-sidenav-container md-sidenav {
+  min-width: 320px;
+  max-width: 320px;
+  display: flex;
+}
+
+.profile-img {
+  text-align: center;
+  padding-top: 24px;
+  img {
+    width: 100%;
+  }
+}
