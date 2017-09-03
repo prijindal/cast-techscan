@@ -12,13 +12,15 @@ import { LanguageComponentComponent } from './language-component/language-compon
 import { RepoComponentComponent } from './repo-component/repo-component.component';
 
 import { GithubService } from './github.service';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LanguageComponentComponent,
-    RepoComponentComponent
+    RepoComponentComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

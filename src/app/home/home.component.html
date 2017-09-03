@@ -1,7 +1,9 @@
 <md-toolbar>
   <md-input-container floatPlaceholder="never">
     <input mdInput placeholder="Search" value="" [(ngModel)]="query" (keyup)="onSearchKeyUp($event)">
-    <md-icon mdSuffix (click)="clearSearch()">close</md-icon>
+    <button md-icon-button mdSuffix (click)="clearSearch()">
+      <md-icon>close</md-icon>
+    </button>
   </md-input-container>
 </md-toolbar>
 <div class="container">    

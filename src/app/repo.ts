@@ -1,3 +1,5 @@
+import { User } from './user';
+
 export interface Repo {
-  owner: any;
+  owner: User;
 }

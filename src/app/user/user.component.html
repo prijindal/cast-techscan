@@ -1,0 +1,14 @@
+<md-toolbar>
+  <button md-icon-button (click)="goBack()">
+    <md-icon class="md-24">arrow_back</md-icon>
+  </button>
+  <span class="example-spacer"></span>
+  <span *ngIf="user; else loginName">{{user.name}}</span>
+  <ng-template #loginName>{{login}}</ng-template>
+</md-toolbar>
+<div *ngIf="user; else loadingBlock">
+  {{user.login}}
+</div>
+<ng-template #loadingBlock>
+  <md-spinner strokeWidth="5" mode="indeterminate"></md-spinner>    
+</ng-template>

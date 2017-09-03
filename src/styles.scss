@@ -6,8 +6,7 @@ html, body {
   height: 100%;
 }
 
-md-input-container {
-    .mat-form-field-flex {
-    align-items: flex-end;
-  }
+md-spinner.mat-progress-spinner {
+  width: 50px;
+  margin: 0 auto;
 }
