@@ -19,7 +19,7 @@ export class RepoComponentComponent implements OnInit {
   ngOnInit() {
   }
 
-  onVisitRepo($event: Event) {
+  onVisitRepo() {
     console.log(this.repo);
     this.router.navigate(['user', this.repo.owner.login])
   }
