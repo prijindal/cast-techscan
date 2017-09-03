@@ -1,7 +1,7 @@
 <md-card (click)="onVisitRepo()">
   <md-card-header>
     <div md-card-avatar>
-      <img [src]="repo.owner.avatar_url"/>
+      <img [src]="getAvatar()"/>
     </div>
     <md-card-title>{{repo.owner.login}}</md-card-title>
     <md-card-subtitle>{{repo.name}}</md-card-subtitle>

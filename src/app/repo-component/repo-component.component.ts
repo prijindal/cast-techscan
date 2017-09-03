@@ -23,4 +23,12 @@ export class RepoComponentComponent implements OnInit {
     console.log(this.repo);
     this.router.navigate(['user', this.repo.owner.login])
   }
+
+  getAvatar() {
+    const avatarUrlArray = this.repo.owner.avatar_url.split('?');
+    const avatarUrl = avatarUrlArray.length > 0 ? avatarUrlArray[1] : '';
+    var searchParams = new URLSearchParams(avatarUrl);
+    searchParams.append('s', '80');
+    return avatarUrlArray[0] + '?' + searchParams.toString()
+  }
 }
