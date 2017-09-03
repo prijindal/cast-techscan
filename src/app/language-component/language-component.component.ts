@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Language } from '../language';
 
@@ -10,8 +10,16 @@ import { Language } from '../language';
 export class LanguageComponentComponent implements OnInit {
   @Input()
   language: Language;
+  @Input()
+  disabled: Language;
+  @Output()
+  click = new EventEmitter<Language>();
 
   constructor() { }
+
+  onClick(event: Event) {
+    this.click.emit(this.language);
+  }
 
   ngOnInit() {
   }

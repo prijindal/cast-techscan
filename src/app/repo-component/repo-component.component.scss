@@ -1,14 +1,28 @@
 :host {
-  flex-basis: 100%;      
-  @media screen and (min-width: 320px){
-    flex-basis: 50%;    
-  }    
-  @media screen and (min-width: 600px){
-    flex-basis: 33.33%;    
-  }
+  // flex-basis: 100%;      
+  // @media screen and (min-width: 320px){
+  //   flex-basis: 50%;    
+  // }    
+  // @media screen and (min-width: 600px){
+  //   flex-basis: 33.33%;    
+  // }
+  min-width: 300px;
+  max-width: 300px;
   md-card {
     padding: 0;
     margin: 24px;
     padding: 24px;
+    [md-card-avatar] img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+    md-card-content {
+      display: flex;
+      align-items: center;
+      md-icon {
+        margin-left: 4px;
+      }
+    }
   }
 }

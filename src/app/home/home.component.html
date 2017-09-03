@@ -1,6 +1,7 @@
 <md-toolbar>
   <md-input-container floatPlaceholder="never">
-    <input mdInput placeholder="Search" value="">
+    <input mdInput placeholder="Search" value="" [(ngModel)]="query" (keyup)="onSearchKeyUp($event)">
+    <md-icon mdSuffix (click)="clearSearch()">close</md-icon>
   </md-input-container>
 </md-toolbar>
 <div class="container">    
@@ -10,10 +11,12 @@
         <h3 md-subheader>Languages</h3>
         <home-language-component
           *ngFor="let language of languages"
+          [disabled]="selectedLanguage == language.name"
+          (click)="onLanguageSelected(language)"
           [language]="language"></home-language-component>
       </md-list>
     </md-sidenav>
-    <div class="main-content">
+    <div class="main-content" *ngIf="selectedLanguage; else noLanguageBlock">
       <div *ngIf="loading === false; else loadingBlock" class="grid">
         <home-repo-component *ngFor="let repo of repos.items" [repo]=repo></home-repo-component>  
       </div>
@@ -26,6 +29,9 @@
         (page)="onChangePageSize($event)">
       </md-paginator>
     </div>
+    <ng-template #noLanguageBlock>
+        Please select a language
+      </ng-template>
   </md-sidenav-container>
 </div>
 

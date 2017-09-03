@@ -5,3 +5,9 @@
 html, body {
   height: 100%;
 }
+
+md-input-container {
+    .mat-form-field-flex {
+    align-items: flex-end;
+  }
+}

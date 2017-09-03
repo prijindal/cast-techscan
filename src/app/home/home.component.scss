@@ -39,6 +39,7 @@ md-toolbar {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  overflow-y: auto;
   flex-grow: 1;
   height: 300px;
 }

@@ -1,9 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { MdPaginator } from '@angular/material';
+import { throttle } from 'lodash';
+
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Observable';
+
+import { GithubService } from '../github.service';
 
 import { Language } from '../language';
 import { Repo } from '../repo';
+import { ReposResponse } from '../repos-response';
 
 @Component({
   selector: 'app-home',
@@ -18,41 +27,68 @@ export class HomeComponent implements OnInit {
     name: 'Javascript',
     color: '#f1e05a'
   }, {
+    name: 'TypeScript',
+    color: '#2b7489'
+  }, {
     name: 'C++',
     color: '#f34b7d'
   }, {
     name: 'Java',
     color: '#b07219'
   }];
+  selectedLanguage: String;
   
   pageSize = 9;
   pageIndex = 0;
-  repos: {
-    incomplete_results?: Boolean,
-    items: Repo[],
-    total_count: number
-  } = {
+  repos: ReposResponse = {
     items: [],
     total_count: 0
   };
   loading: Boolean = false;
+  query: string = '';
+
+  paramListener: Observable<ReposResponse>;
 
   constructor(
-    private http: Http,
-  ) { }
+    private route: ActivatedRoute,
+    private router: Router,
+    private github: GithubService,
+  ) {
+    this.getRepos = throttle(this.getRepos, 2000);
+  }
 
   ngOnInit() {
-    this.getRepos();
+    const lang = this.route.snapshot.paramMap.get('language');
+    const query = this.route.snapshot.paramMap.get('query');
+    this.selectedLanguage = lang;
+    this.query = query
+    if(lang || query) {
+      this.getRepos();
+    }
+    this.paramListener = this.route.paramMap.switchMap((params: ParamMap) => {
+      this.selectedLanguage = params.get('language');
+      this.query = params.get('query');
+      return this.getRepos();
+    });
   }
 
   getRepos() {
     this.loading = true;
-    const url = `https://api.github.com/search/repositories?q=language:python&page=${this.pageIndex + 1}&per_page=${this.pageSize}`;
-    const req = this.http.get(url);
-    req.subscribe((observer) => {
-      this.repos = observer.json();
+    let query = `language:${this.selectedLanguage}`;
+    if(this.query) {
+      query += ` ${this.query}`;
+    }
+    return this.github.reposSearch(query, this.pageIndex, this.pageSize)
+    .then((observer) => {
+      this.repos = observer;
       this.loading = false;
+      return observer;
     });
+  }
+
+  onLanguageSelected(language: Language) {
+    this.selectedLanguage = language.name;
+    this.changeRoute();
   }
 
   onChangePageSize(event: MdPaginator) {
@@ -60,4 +96,24 @@ export class HomeComponent implements OnInit {
     this.getRepos();
   }
 
+  onSearchKeyUp(event: Event) {
+    this.changeRoute();
+  }
+
+  clearSearch() {
+    this.query = null;
+    this.changeRoute();
+  }
+
+  changeRoute() {
+    const params = {}
+    if(this.selectedLanguage) {
+      params['language'] = this.selectedLanguage
+    } 
+    if(this.query) {
+      params['query'] = this.query
+    }
+    this.router.navigate(['languages', params])
+    this.getRepos();
+  }
 }

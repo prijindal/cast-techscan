@@ -11,6 +11,8 @@ import { HomeComponent } from './home/home.component';
 import { LanguageComponentComponent } from './language-component/language-component.component';
 import { RepoComponentComponent } from './repo-component/repo-component.component';
 
+import { GithubService } from './github.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +27,9 @@ import { RepoComponentComponent } from './repo-component/repo-component.componen
     AppRoutingModule,
     AppMaterialModule
   ],
-  providers: [],
+  providers: [
+    GithubService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
-<button md-button class="languages">
+<button md-button class="languages" (click)="onClick($event)" [disabled]="disabled">
   <span class="circle-color" [style.backgroundColor]="language.color"></span>
   <span>
     {{language.name}}

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Repo } from '../repo';
 
@@ -10,9 +11,16 @@ import { Repo } from '../repo';
 export class RepoComponentComponent implements OnInit {
   @Input()
   repo: Repo;
-  constructor() { }
+
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
 
+  onVisitRepo($event: Event) {
+    console.log(this.repo);
+    this.router.navigate(['user', this.repo.owner.login])
+  }
 }
