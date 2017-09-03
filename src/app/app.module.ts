@@ -1,16 +1,29 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AppMaterialModule } from './app.material.module';
+
+import { HomeComponent } from './home/home.component';
+import { LanguageComponentComponent } from './language-component/language-component.component';
+import { RepoComponentComponent } from './repo-component/repo-component.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    LanguageComponentComponent,
+    RepoComponentComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    FormsModule,
+    HttpModule,
+    AppRoutingModule,
+    AppMaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

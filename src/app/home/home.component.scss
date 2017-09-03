@@ -1,0 +1,44 @@
+:host {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex: 1;
+}
+
+md-sidenav-container {
+  height: 100%;
+  md-sidenav {
+    min-width: 240px;
+    max-width: 240px;
+  }
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  md-spinner {
+    width: 50px;
+    margin: 0 auto;
+  }
+}
+
+md-toolbar {
+  background: #fff;
+
+  md-input-container {
+    width: 100%;
+  }
+}
+
+.grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  height: 300px;
+}

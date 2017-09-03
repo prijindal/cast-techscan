@@ -1,0 +1,31 @@
+<md-toolbar>
+  <md-input-container floatPlaceholder="never">
+    <input mdInput placeholder="Search" value="">
+  </md-input-container>
+</md-toolbar>
+<div class="container">    
+  <md-sidenav-container>
+    <md-sidenav mode="side" opened="true">
+      <md-list>
+        <h3 md-subheader>Languages</h3>
+        <home-language-component
+          *ngFor="let language of languages"
+          [language]="language"></home-language-component>
+      </md-list>
+    </md-sidenav>
+    <div class="main-content">
+      <div *ngIf="loading === false; else loadingBlock" class="grid">
+        <home-repo-component *ngFor="let repo of repos.items" [repo]=repo></home-repo-component>  
+      </div>
+      <ng-template #loadingBlock>
+        <md-spinner strokeWidth="5" mode="indeterminate"></md-spinner>          
+      </ng-template>
+      <md-paginator [length]="repos.total_count"
+        [pageIndex]="pageIndex"
+        [pageSize]="pageSize"
+        (page)="onChangePageSize($event)">
+      </md-paginator>
+    </div>
+  </md-sidenav-container>
+</div>
+

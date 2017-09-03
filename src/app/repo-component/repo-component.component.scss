@@ -1,0 +1,14 @@
+:host {
+  flex-basis: 100%;      
+  @media screen and (min-width: 320px){
+    flex-basis: 50%;    
+  }    
+  @media screen and (min-width: 600px){
+    flex-basis: 33.33%;    
+  }
+  md-card {
+    padding: 0;
+    margin: 24px;
+    padding: 24px;
+  }
+}

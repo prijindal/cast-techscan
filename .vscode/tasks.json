@@ -6,7 +6,7 @@
     {
       "taskName": "serve",
       "type": "shell",
-      "command": "node --max_old_space_size=256 ./node_modules/.bin/ng serve --output-hashing none --no-sourcema",
+      "command": "node --max_old_space_size=512 ./node_modules/.bin/ng serve --output-hashing none --no-sourcemaps --live-reload false --sourcemaps false",
       "problemMatcher": []
     }
   ]
