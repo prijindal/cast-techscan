@@ -2,6 +2,18 @@
 
 This project was made as a submission for CAST Hiring challenge
 
+
+## Instructions
+In short
+```
+npm install
+npm run prod
+```
+
+## Installation
+First install all the dependencies using `npm install`.
+
+
 ## Server
 
 Run `npm run prod` to run the server. This server is for demonstration purpose
